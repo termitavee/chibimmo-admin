@@ -12,7 +12,7 @@
 </template>
 
 <script>
-const feedItem = require("./feedItem");
+const feedItem = require("./component/feed-item");
 
 module.exports = {
   props: ["itemList"],

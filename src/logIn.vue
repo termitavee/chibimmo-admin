@@ -53,7 +53,7 @@
 
 <script>
 
-const { getIP } = require("./db");
+const { getIP, setIP } = require("./js/db");
 
 module.exports = {
   props: [],

@@ -10,10 +10,13 @@
 </template>
 
 <script>
+
+const adminItem = require("./component/admin-item");
+
 module.exports = {
   props: ["itemList"],
   components: {
-    "admin-item": feedItem
+    "admin-item": adminItem
   },
   data: function() {
     return {};
