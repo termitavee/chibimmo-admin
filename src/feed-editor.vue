@@ -1,19 +1,25 @@
 <template>
-<div>
-<form>
-  <span>Title</span>
-  <input type="text" v-model="title">
-  
-  <span>image</span>
-  <input type="image" v-model="isAdmin">
-  
-  <span>Content</span>
-  <textarea v-model="content" />
-  
-  <button @click="save">Save</button>
-  <button @click="cancel">Exit</button>
-</form>
+<div class="pure-g">
+  <form class="pure-u-1-2">
+    <span>Title</span>
+    <input type="text" v-model="title">
+    
+    <span>image</span>
+    <input type="image" v-model="image">
+    
+    <span>Content</span>
+    <textarea v-model="content" />
+    
+    <button @click="save">Save</button>
+    <button @click="cancel">Exit</button>
+  </form>
 
+<div class="pure-u-1-2">
+  <h3 v-text="title"></h3>
+  <img src="" alt="">
+  <p v-text="content"></p>
+
+</div>
 
 </div>
 </template>
@@ -22,7 +28,7 @@
 module.exports = {
   props: ["item"],
   data: () => {
-    return { title: "", isAdmin: false, content: "" };
+    return { title: "", image: false, content: "" };
   },
   methods: {},
   save: () => {

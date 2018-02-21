@@ -1,50 +1,38 @@
 <template>
 <div>
-<a v-text="loginButton" @click="toggleLogin" class="pure-button" >Log in</a>
-    
-    <div v-show="!loginVisible">
-        <p>
-            <span>User name</span><br>
-            <input type="text" v-model="form.user">
-        </p>
-        <p>
-            <span>Pasword</span><br>
-            <input type="password" v-model="form.pass">
-        </p>
-        <p>
-            <span>Repeat pasword</span><br>
-            <input type="password" v-model="form.pass2">
-        </p>
-        <p>
-            <span>Email</span><br>
-            <input type="email" v-model="form.email">
-        </p>
-        <p>
-            <span>Server</span><br>
-            <input type="text" v-model="form.server">
-        </p>
-    </div>
-    
-    <div v-show="loginVisible">
-        <p>
-            <span>User name</span><br>
-            <input type="text" v-model="form.user">
-        </p>
-        <p>
-            <span>Pasword</span><br>
-            <input type="password" v-model="form.pass" @keyup.enter="submit">
-        </p>
-        <p>
-            <input type="checkbox" v-model="form.remember">
-            <span>Remember?</span>
-        </p>
-        <p>
-            <span>Server</span><br>
-            <input type="text" v-model="form.server">
-        </p>
-        
-    </div>
-    <a v-text="submitButton" @click="submit" class="pure-button" >Submit</a>
+  <a v-text="loginButton" @click="toggleLogin" class="pure-button" >Log in</a>
+  <p>
+    <span>User name</span><br>
+    <input type="text" v-model="form.user">
+  </p>
+  <p>
+    <span>Pasword</span><br>
+    <input type="password" v-model="form.pass">
+  </p>
+
+  <div v-show="!loginVisible">
+    <p>
+      <span>Repeat pasword</span><br>
+      <input type="password" v-model="form.pass2">
+    </p>
+    <p>
+      <span>Email</span><br>
+      <input type="email" v-model="form.email">
+    </p>
+  </div>
+  
+  <div v-show="loginVisible">
+    <p>
+      <input type="checkbox" v-model="form.remember">
+      <span>Remember?</span>
+    </p>
+      
+  </div>
+    <p>
+      <span>Server</span><br>
+      <input type="text" v-model="form.server">
+    </p>
+  <a v-text="submitButton" @click="submit" class="pure-button" >Submit</a>
     
 
 
@@ -52,9 +40,10 @@
 </template>
 
 <script>
-
 const { getIP, setIP } = require("./js/db");
+const { required, minLength } = require('vuelidate/lib/validators')
 
+//console.log(validators)
 module.exports = {
   props: [],
   data: function() {
@@ -134,8 +123,6 @@ module.exports = {
           validEmail = false;
           messageEmail = "There is something strange here";
         }
-
-        
       } else {
         validEmail = true;
       }
@@ -155,19 +142,18 @@ module.exports = {
       if (validUser && validPass && validPass2 && validEmail && validCaptcha) {
         this.sendServer();
       } else {
-        
         //TODO mark wrong parts
       }
     }
   },
   sendServer: function() {
     //TODO some kind of loading
-    const that = this
+    const that = this;
     const action = this.loginVisible ? "LogIn" : "SignUp";
     console.log(action);
     //http://127.0.0.1:3000
     //termitavee.ddns.net
-    fetch("http://" + that.formIP + ":3000/" + action, {
+    fetch("http://" + that.formIP + ":3000/admin/" + action, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: JSON.stringify(that.form)
@@ -180,15 +166,14 @@ module.exports = {
         console.log(res);
         if (res.status == 202) {
           if (res.action == "login") {
-            
             that.$router.push("/index");
           } else {
             //TODO now log In
-            that.loginVisible = true
+            that.loginVisible = true;
           }
         } else {
           //TODO fairule
-          console.log(res.status)
+          console.log(res.status);
         }
       })
       .catch(error => {

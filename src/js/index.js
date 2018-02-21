@@ -1,6 +1,17 @@
-const login = require('./logIn.vue')
-const index = require('./logged')
-const newsEditor = require('./feed-editor')
+/* import Vue from 'vue'*/
+import VueRouter from 'vue-router'
+import Vuelidate from 'vuelidate'
+ 
+
+
+import login from './logIn.vue'
+import index from './logged'
+import newsEditor from './feed-editor'
+
+
+
+Vue.use(VueRouter)
+Vue.use(Vuelidate)
 
 const routes = [
   { path: '/login', component: login },
