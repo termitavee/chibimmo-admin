@@ -1,7 +1,11 @@
 <template>
 <div>
   <span v-text="item.nick" ></span>
+
   <input type="isAdmin" v-model="item.isAdmin">
+
+  <button v-on:click="edit">Save</button>
+  <button v-on:click="remove">Delete</button>
 </div>
 </template>
 <script>

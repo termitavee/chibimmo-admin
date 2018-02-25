@@ -2,13 +2,9 @@
 import VueRouter from 'vue-router'
 import Vuelidate from 'vuelidate'
  
-
-
 import login from './logIn.vue'
 import index from './logged'
 import newsEditor from './feed-editor'
-
-
 
 Vue.use(VueRouter)
 Vue.use(Vuelidate)

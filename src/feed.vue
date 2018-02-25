@@ -1,12 +1,12 @@
 <template>
 <div>
-   <h3 id="tile" v-text="title">News</h3>
-    <ul id="feed">
-      <li v-for="(item, key) in itemList" :key="key">
-        <feed-item :content="item" :reference="key"/>
-      </li>
-    </ul>
-
+  <h3 id="tile" v-text="title">News</h3>
+  <ul id="feed">
+    <li v-for="(item, key) in itemList" :key="key">
+      <feed-item :content="item" :reference="key"/>
+    </li>
+  </ul>
+  <button @click="newEditor" class="pure-button">Create new</button>
 
 </div>
 </template>
@@ -24,7 +24,11 @@ module.exports = {
       content: {}
     };
   },
-  methods: {},
+  methods: {
+    newEditor: ()=>{
+
+    }
+  },
 
   mounted: function() {}
 };
