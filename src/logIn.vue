@@ -76,11 +76,11 @@ module.exports = {
   validations: {
     form: {
       user: {
-        required,
+        required: requiredUnless("loginVisible"),
         minLength: minLength(4)
       },
       pass: {
-        required,
+        required: requiredUnless("loginVisible"),
         minLength: minLength(6)
       },
       pass2: {
@@ -132,7 +132,10 @@ module.exports = {
 
       fetch("http://" + this.formIP + ":3000/" + action, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
         body: JSON.stringify(this.form)
       })
         .then(res => res.json())

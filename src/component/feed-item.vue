@@ -16,7 +16,7 @@
 </template>
 <script>
 module.exports = {
-  props: ["item", "reference"],
+  props: ["item", "reference", "formIP"],
   data: function() {
     return {
       showDetails: false,
